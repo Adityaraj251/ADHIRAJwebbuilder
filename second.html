@@ -18,7 +18,7 @@ body { background: var(--white); color: var(--black); font-weight:400; }
 
 /* Header */
 header { position: sticky; top: 0; width:100%; height:100px; display:flex; justify-content:center; align-items:center; background: var(--white); box-shadow:0 4px 10px rgba(0,0,0,0.1); z-index:1000; }
-header img.logo-img { max-height:380px; width:auto; object-fit:contain; }
+header img.logo-img { max-height:400px; width:auto; object-fit:contain; }
 
 /* Form Section */
 .form-section { padding:80px 20px; max-width:800px; margin:0 auto; }
@@ -30,6 +30,9 @@ button { background:var(--black); color:var(--yellow); padding:15px 25px; border
 button:hover { background:var(--yellow); color:var(--black); }
 
 .thankyou-message { display:none; text-align:center; margin-top:30px; font-size:18px; font-weight:700; color: var(--black); }
+
+h2 { margin-top:30px; color: var(--black); font-weight:700; }
+hr { border:none; border-top:3px solid var(--yellow); }
 
 @media(max-width:768px){
   .form-section { padding:50px 15px; }
@@ -47,15 +50,21 @@ button:hover { background:var(--yellow); color:var(--black); }
   <h1>Request Your Website Project</h1>
   <form id="projectForm" action="https://formspree.io/f/mzzjlgdw" method="POST" enctype="multipart/form-data">
     
-    <input type="text" name="name" id="name" placeholder="Your Name" required>
-    <input type="email" name="_replyto" id="email" placeholder="Your Email" required>
-    <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number" required>
-    <h2>Website Details : </h2>
+    <!-- Basic Client Info -->
+    <h2>Basic Client Information :</h2>
     <hr size="3">
-    <input type="text" name="website_name" id="website_name" placeholder="Website Name" required>
-    <input type="file" name="logo" accept="image/*">
-    <input type="text" name="owner_name" placeholder="Owner of Website Name" required>
-    
+    <h4>Name -</h4>
+    <input type="text" name="full_name" id="full_name" placeholder="Full Name" required>
+    <h4>Mobile Number -</h4>
+    <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number" required>
+    <h4>E-mail -</h4>
+    <input type="email" name="_replyto" id="email" placeholder="Email Address" required>
+
+    <!-- Website Info -->
+    <h2>Website Information :</h2>
+    <h4>Owner Name -</h4>
+    <input type="text" name="owner_name" placeholder="Owner / Business Name" required>
+    <h4>Select Website Type / Category -</h4>
     <select name="website_type" id="website_type" required>
       <option value="">Select Website Type / Category</option>
       <option value="Portfolio">Portfolio</option>
@@ -64,14 +73,21 @@ button:hover { background:var(--yellow); color:var(--black); }
       <option value="Blog / Personal">Blog / Personal</option>
       <option value="Other">Other</option>
     </select>
-    
-    <input type="text" name="theme_color" placeholder="Theme / Colour Preference">
-    
+    <h4>Website Theme/Style -</h4>
+    <input type="text" name="theme_style" placeholder="Website Theme / Style (minimal, modern, creative, professional)">
+    <h4>Preferred Fonts (optional) -</h4>
+    <input type="text" name="preferred_fonts" placeholder="Preferred Fonts (optional)">
+    <h4>Logo -</h4>
+    <input type="file" name="logo" accept="image/*" placeholder="logo">
+    <h4>Tagline/Slogan -</h4>
+    <input type="text" name="tagline" placeholder="Tagline / Slogan">
+    <h4>Describe about Website -</h4>
+    <textarea name="seo_requirements" placeholder="SEO Requirements (meta tags, keywords, etc.)" rows="4"></textarea>
+
     <button type="submit">Submit Project Request</button>
   </form>
 
   <div class="thankyou-message" id="thankyouMessage"></div>
-</section>
 
   <!-- SECURITY & PRIVACY -->
   <div style="margin-top:40px; padding:20px; border:2px solid var(--yellow); border-radius:10px; background:#fffceb;">
@@ -81,6 +97,7 @@ button:hover { background:var(--yellow); color:var(--black); }
     </p>
   </div>
 </section>
+
 <script>
 const form = document.getElementById('projectForm');
 const thankYou = document.getElementById('thankyouMessage');
@@ -91,7 +108,7 @@ form.addEventListener('submit', function(e){
   const data = new FormData(form);
   const action = form.action;
 
-  const clientName = document.getElementById('name').value;
+  const clientName = document.getElementById('full_name').value;
   const websiteType = document.getElementById('website_type').value;
 
   fetch(action, {
@@ -118,4 +135,4 @@ form.addEventListener('submit', function(e){
 </script>
 
 </body>
-</html>
+  </html>
